@@ -6,6 +6,7 @@ import torchaudio
 # 设置音频后端
 torchaudio.set_audio_backend("soundfile")
 
+
 # 定义GAN的判别器
 class Discriminator(nn.Module):
     def __init__(self):
@@ -24,6 +25,7 @@ class Discriminator(nn.Module):
         x = torch.sigmoid(self.fc2(x))  # 通过第二层全连接层并应用Sigmoid激活函数，将输出限制在0到1之间
         return x
 
+
 # 定义填充函数，如果音频片段小于期望长度，使用零进行填充
 def pad_waveform(waveform, desired_length):
     if waveform.size(1) < desired_length:
@@ -31,6 +33,7 @@ def pad_waveform(waveform, desired_length):
         last_dim_padding = (0, num_missing_samples)
         waveform = F.pad(waveform, last_dim_padding)
     return waveform
+
 
 # 加载模型
 discriminator = Discriminator()
@@ -62,7 +65,8 @@ with torch.no_grad():  # 不需要计算梯度
             samples.append(last_segment)
 
         # 对每个非空样本计算梅尔频谱
-        mel_spectrograms = [torch.squeeze(torchaudio.transforms.MelSpectrogram(sample_rate=sample_rate)(sample)) for sample in samples if sample.nelement() > 0]
+        mel_spectrograms = [torch.squeeze(torchaudio.transforms.MelSpectrogram(sample_rate=sample_rate)(sample)) for
+                            sample in samples if sample.nelement() > 0]
 
         if len(mel_spectrograms) == 0:
             print("No mel spectrograms were generated from the test data. Skipping testing.")
