@@ -35,7 +35,8 @@ def pad_waveform(waveform, desired_length):
     return waveform
 
 
-# 加载模型
+# 加载模型 Deep Convolutional GAN(DCGAN)
+# https://github.com/eriklindernoren/PyTorch-GAN.git
 discriminator = Discriminator()
 discriminator.load_state_dict(torch.load('path_to_your_model.pth'))
 discriminator.eval()  # 设置为评估模式
@@ -48,7 +49,9 @@ sample_length = sample_rate  # 1秒的样本长度
 with torch.no_grad():  # 不需要计算梯度
 
     # 音频文件路径列表
-    audio_files = ['./audio1.wav', './audio2.wav', './audio3.wav']
+    # audio_files = ['./audio1.wav', './audio2.wav', './audio3.wav']
+    audio_files = ['../data/wav48/p225/p255_001.wav', '../data/wav48/p225/p255_002.wav',
+                   '../data/wav48/p225/p255_003.wav']
 
     for audio_file in audio_files:
 
