@@ -37,8 +37,10 @@ def pad_waveform(waveform, desired_length):
 
 # 加载模型 Deep Convolutional GAN(DCGAN)
 # https://github.com/eriklindernoren/PyTorch-GAN.git
+# generator.pth
+# discriminator.pth
 discriminator = Discriminator()
-discriminator.load_state_dict(torch.load('path_to_your_model.pth'))
+discriminator.load_state_dict(torch.load('discriminator.pth'))
 discriminator.eval()  # 设置为评估模式
 
 # 假设我们知道每个样本的长度是1秒
